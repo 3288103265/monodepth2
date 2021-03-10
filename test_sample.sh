@@ -1,0 +1,1 @@
+python test_simple.py --image_path samples/real/ --out_path samples/depth --model_name mono_640x192 
