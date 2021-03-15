@@ -14,6 +14,7 @@ import numpy as np
 import PIL.Image as pil
 import matplotlib as mpl
 import matplotlib.cm as cm
+import tqdm
 
 import torch
 from torchvision import transforms, datasets
@@ -109,7 +110,7 @@ def test_simple(args):
 
     # PREDICTING ON EACH IMAGE IN TURN
     with torch.no_grad():
-        for idx, image_path in enumerate(paths):
+        for idx, image_path in tqdm.tqdm(enumerate(paths), total=len(paths)):
 
             if image_path.endswith("_disp.jpg"):
                 # don't try to predict disparity for a disparity image!
@@ -147,8 +148,8 @@ def test_simple(args):
             name_dest_im = os.path.join(output_directory, "{}_disp.jpeg".format(output_name))
             im.save(name_dest_im)
 
-            print("   Processed {:d} of {:d} images - saved prediction to {}".format(
-                idx + 1, len(paths), name_dest_im))
+            # print("   Processed {:d} of {:d} images - saved prediction to {}".format(
+            #    idx + 1, len(paths), name_dest_im))
 
     print('-> Done!')
 
